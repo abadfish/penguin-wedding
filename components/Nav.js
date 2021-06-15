@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { HamburgerThreeDYReverse } from 'react-animated-burgers'
 import Link from 'next/link'
 
-const Nav = () => {
+const Nav = (props) => {
   const [isActive, setActive] = useState(false)
   const toggle = () => {
     setActive(prevState => setActive(!prevState))
@@ -26,19 +26,20 @@ const Nav = () => {
       </MobileNav>
       { mobile && isActive ?
         <Menu>
-          <Link href="/">Home</Link>
-          <Link href="/story">Our Story</Link>
+          <Link href="/">Our Story</Link>
           <Link href="/details">When & Where</Link>
           <Link href="/rsvp">RSVP</Link>
+          <Link href="/donate">Registry</Link>
         </Menu>
         :
         null
       }
-      <NavBar >
-        <LinkCell><Link href="/">Home</Link></LinkCell>
-        <LinkCell><Link href="/story">Our Story</Link></LinkCell>
+      <NavBar textColor={props.textColor}>
+        <LinkCell><Link href="/">Our Story</Link></LinkCell>
         <LinkCell><Link href="/details">When & Where</Link></LinkCell>
         <LinkCell><Link href="/rsvp">RSVP</Link></LinkCell>
+        <LinkCell><Link href="/donate">Donate</Link></LinkCell>
+
       </NavBar>
     </>
   )
@@ -54,7 +55,7 @@ const NavBar = styled.nav `
   padding: 0 2rem;
   background: transparent;
   // color: #fff;
-  
+  color: ${props => props.textColor};
   text-transform: uppercase;
   text-align: center;
   @media (max-width: 768px) {
@@ -72,7 +73,8 @@ const LinkCell = styled.div `
   letter-spacing: 3px;
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  color: rgba(36,46,98,1);
+  // color: rgba(36,46,98,1);
+  
 `
 
 // const LogoLink = styled.img `

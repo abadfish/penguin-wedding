@@ -4,8 +4,8 @@ import Layout from '../components/Layout'
 import Modal from '../components/Modal'
 import Input from 'muicss/lib/react/input'
 import Textarea from 'muicss/lib/react/textarea'
+import Radio from 'muicss/lib/react/radio'
 import Button from 'muicss/lib/react/button'
-import { SectionHeading } from './index'
 const { server } = require('../config')
 
 // export async function sendMessage(contact) {
@@ -18,13 +18,17 @@ const { server } = require('../config')
 //   console.log(result)
 // }
 
-const Success = () => {
+const Success = (rsvp) => {
   return (
     <SuccessMsg>
-      <img src="https://res.cloudinary.com/abadfish/image/upload/v1606877302/ffix/farriers-fix-logo-horizontal.jpg" alt="ff-logo"/>
       <div>
-        <p>Thanks for reaching out!</p>
-        <p>We'll get back to you shortly.</p>
+        <p>Thanks for your response.</p>
+        { rsvp === 'yes' ?
+          <p>We're so glad you're able to make it!</p>
+          :
+          null
+        }
+        
       </div>
     </SuccessMsg>
   )
@@ -34,9 +38,9 @@ const Rsvp = () => {
 
   const [msgSuccess, setMsgSuccess] = useState(false)
 
-  async function sendMessage(contact){
-    const res = await fetch(`${ server }/send_email`, {
-      body: JSON.stringify(contact),
+  async function sendRsvp(guest){
+    const res = await fetch(`${ server }/send_rsvp`, {
+      body: JSON.stringify(guest),
       headers: {'Content-Type': 'application/json'},
       method: 'POST'
     })
@@ -46,27 +50,28 @@ const Rsvp = () => {
   }
 
   const processResult = (result) => {
-    if (result.message === 'email sent successfully') {
+    if (result.message === 'rsvp successfully recorded') {
       setMsgSuccess(true)
     }
   }
 
-  const [ contact, setContact ] = useState({
+  const [ guest, setGuest ] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    rsvp: '',
   })
 
   const messageRef = useRef()
 
   const handleOnChange = e => {
     const { name, value } = e.target
-    setContact({...contact, [name]: value})
+    setGuest({...guest, [name]: value})
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    sendMessage(contact)
+    sendRsvp(guest)
     messageRef.current.reset()
   }
 
@@ -85,26 +90,30 @@ const Rsvp = () => {
       }
       <ContactPage>
         <ContactForm>
-          <h3>Leave us a message below and someone will get back to you shortly.</h3>
-          <form ref={ messageRef } onSubmit={handleSubmit}>
+          <h3>Will you be joining us?</h3>
+          <form ref={ messageRef } onSubmit={ handleSubmit }>
+            <Checks>
+              <Radio name="rsvp" label="Yup, be there with bells!" value="yes" />
+              <Radio name="rsvp" label="Nope, but I'll be there in spririt :)" value="no" />
+            </Checks>
             <Input
               label='Name'
               name='name'
               type="text"
-              onChange={handleOnChange}
+              onChange={ handleOnChange }
             />
             <Input
               label='Email'
               name='email'
               type="text"
-              onChange={handleOnChange}
+              onChange={ handleOnChange }
             />
+            <p>If you are RSVP-ing for another guest in addition to yourself or you have a plus one indicated on your invitation, please specify here.</p>
             <Textarea
               label='Message'
               name='message'
-              onChange={handleOnChange}
+              onChange={ handleOnChange }
             />
-
             <Button type='submit' variant='raised'>Submit</Button>
           </form>
         </ContactForm>
@@ -123,7 +132,7 @@ const ContactForm = styled.section `
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-
+  z-index: 1000;
   form {
     margin: 3rem 0;
     div {
@@ -138,6 +147,11 @@ const ContactForm = styled.section `
     }
     Input {
       text-align: center;
+    }
+    p {
+      color: #242e62;
+      font-family: 'Jost', sans-serif;
+      font-size: 120%;    
     }
   }
   @media (max-width: 768px) {
@@ -174,4 +188,12 @@ const ContactPage = styled.div `
   @media (max-width: 768px) {
     flex-direction: column;
   }
+`
+const Checks = styled.div `
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #242e62;
+  font-family: 'Jost', sans-serif;
+  font-size: 120%;
 `

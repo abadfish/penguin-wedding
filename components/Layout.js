@@ -15,9 +15,9 @@ const Layout = ({ children }) => {
   const bgImage = () => {
     switch (router.pathname) {
       case '/':
-        return rose
-      case '/rsvp':
         return null
+      case '/rsvp':
+        return rose
       default:
         return null
     }
@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
             </ContactUs>
           </Link>
           <Header />
-          <PageBg layoutImage={bgImage()}>
+          <PageBg layoutImage={ bgImage() }>
             <BgOverlay >
               <Main>
               { children }
@@ -85,6 +85,8 @@ const BgOverlay = styled.div `
   width: 100%;
   display: flex;
   flex-direction: column;
+  background: rgba(255,255,255,0.8);
+
 `
 const Main = styled.main  `
   /* text-align: center; */

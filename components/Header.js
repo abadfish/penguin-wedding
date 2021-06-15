@@ -13,7 +13,7 @@ const Header = (props) => {
     switch (router.pathname) {
       case '/':
         return {
-          image: rose,
+          image: halfdome,
           heading1: "Leslie Burton-Lopez",
           heading2: "Kirsten O'Farrell",
           subHeading: "September 25, 2021",
@@ -21,7 +21,7 @@ const Header = (props) => {
         }
       case '/rsvp':
         return {
-          image: halfdome,
+          image: rose,
           heading1: "RSVP",
           subHeading: "",
           tagLine: "",
@@ -30,28 +30,48 @@ const Header = (props) => {
     }
   }
 
-  const headerText = () => {
-
+  const headerStyle = () => {
+    console.log(router.pathname)
+    switch (router.pathname) {
+      case '/rsvp':
+        return {
+          textColor: "rgba(36,46,98,1)",
+          bgColor: "rgba(255,255,255,0.6)",
+          headerHeight: "30vh"
+        }
+      case '/':
+        return {
+          textColor: "rgba(255,255,255,1)",
+          bgColor: "rgba(36,46,98,0.3)",
+          headerHeight: "100vh"
+        }
+      default:
+        return {
+          textColor: "#fff",
+          bgColor: "rgba(255,255,255,0.5)",
+          headerHeight: "100vh"
+        }
+    }
   }
   return (
     <HeaderComponent>
       <HeaderWrapper headerImage={headerContent().image}>
-        <HeaderOverlay>
-          <Nav />
-          <HeaderContainer>
+        <HeaderOverlay bgColor={ headerStyle().bgColor }>
+          <Nav textColor={ headerStyle().textColor }/>
+          <HeaderContainer 
+            textColor={ headerStyle().textColor }
+            height={ headerStyle().headerHeight }  
+          >
             <Intro>
-              <h1>{headerContent().heading1}</h1>
-              <h3>{headerContent().tagLine}</h3>
-              <h1>{headerContent().heading2}</h1>
+              <h1 >{ headerContent().heading1 }</h1>
+              <h3>{ headerContent().tagLine }</h3>
+              <h1>{ headerContent().heading2 }</h1>
             </Intro>
-            <h3>{headerContent().subHeading}</h3>
-            
+            <h3>{ headerContent().subHeading }</h3>
           </HeaderContainer>
-
         </HeaderOverlay>
       </HeaderWrapper>
-      </HeaderComponent >
-
+    </HeaderComponent >
   )
 }
 
@@ -61,10 +81,7 @@ const HeaderComponent = styled.section `
   width: 100%;
   clear: both;
   position: relative;
-  // webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
-  // box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
 `
-
 const HeaderWrapper = styled.div`
   background-image: url(${props => props.headerImage});
   background-size: cover;
@@ -72,18 +89,38 @@ const HeaderWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
+`
+const HeaderOverlay = styled.div `
+  height: 100%;
+  width: 100%;
+  background-color: ${props => props.bgColor};
+`
+const HeaderContainer = styled.div`
+  margin: 0 auto;
+  padding: 1.45rem 1.0875rem;
+  height: ${props => props.height};
+  color: ${props => props.textColor};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  @media (max-width: 1025px) {
+    // min-height: 500px;
+    padding: 0 1.0875rem
+  }
   h1 {
     font-size: 550%;
     font-weight: 100;
     // font-family: 'Petit Formal Script', cursive;
     font-family: 'Jost', sans-serif;
-    color: rgba(36,46,98,1);
+    color: ${props => props.textColor};
   }
   h2 {
     font-family: 'Petit Formal Script', cursive;
     font-size: 300%;
     font-weight: 200;
-    color: rgba(36,46,98,1);
+    color: ${props => props.textColor};
     // text-transform: uppercase;
   }
   h3 {
@@ -91,7 +128,7 @@ const HeaderWrapper = styled.div`
     font-family: 'Petit Formal Script', cursive;
     font-size: 200%;
     font-weight: 200;
-    color: rgba(36,46,98,1);
+    color: ${props => props.textColor};
     
   }
   @media (max-width: 768px) {
@@ -106,37 +143,15 @@ const HeaderWrapper = styled.div`
     }
   }
 `
-
-const HeaderOverlay = styled.div `
-  height: 100%;
-  width: 100%;
-  // background-color: rgba(3,3,3, 0.5);
-`
-const HeaderContainer = styled.div`
-  margin: 0 auto;
-  padding: 1.45rem 1.0875rem;
-  min-height: 560px;
-  color: #fff;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  @media (max-width: 1025px) {
-    // display: block;
-    min-height: 500px;
-    padding: 0 1.0875rem
-  }
-`
 const Intro = styled.div `
-  // text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+`
+const HeaderSubComponent = styled.div `
 
 `
-
 // const HeaderRight = styled.div `
 //   padding: 1rem 3rem;
 //   @media (max-width: 768px) {

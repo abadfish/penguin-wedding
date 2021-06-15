@@ -7,54 +7,53 @@ import Layout from '../components/Layout'
 
 const Home = () => {
 
+  const yosemite3 = "https://res.cloudinary.com/abadfish/image/upload/v1623705741/penguinWedding/yosemite-3.jpg"
+
   return (
     <Layout>
-      <Content>
-        <PageMessage>
-          
-        </PageMessage>
+      <StorySection>
+        <StoryCard>
+          <StoryImage src={ yosemite3 } alt="Picture of the author"  layout="responsive" width={500}
+        height={700}/>
+        </StoryCard>
+        <StoryCard></StoryCard>
+        <StoryCard></StoryCard>
         
-      </Content>
+      </StorySection>
+        
     </Layout>
   )
 }
 
 export default Home
 
-export const Content = styled.section `
-  width: 100%;
+const StoryImage = styled(Image) `
+-webkit-box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2); box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2);
+&:hover {
+  webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+  box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+}
+
+
 `
-export const More = styled.span `
-  width: 250px;
-  font-size: 150%;
-  font-weight: 600;
-  padding-top: .7rem;
-  /* color: #739ac5; */
-  /* background-image: linear-gradient(to left, #242e62, red); */
-  background-image: linear-gradient(to left, red, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: background-image 500ms cubic-bezier(0, 0, 0.53, 0.54);
-  -webkit-transition: background-image 500ms cubic-bezier(0, 0, 0.53, 0.54);
+
+const StoryCard = styled.article `
+  margin: 2rem;
+  width: 300px;
+  height: auto;
+  background: #fff;
   &:hover {
-    background-image: linear-gradient(to left, #a50000, #a50000);
-    /* background-image: linear-gradient(to left, red, #242e62); */
-    cursor: pointer;
+    webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+    box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
   }
-  @media (max-width: 768px) {
-    font-size: 140%;
-  }
-
-
 `
-export const PageMessage = styled.div `
+
+export const StorySection = styled.section `
   width: 100%;
   min-height: 300px;
-  background: #f3f3f3;
   color: #242e62;
-  padding: 3rem 4rem;
+  padding: 3rem ;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
   text-align: left;
   p {
