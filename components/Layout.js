@@ -11,15 +11,36 @@ const Layout = ({ children }) => {
   const router = useRouter()
   const rose = "https://res.cloudinary.com/abadfish/image/upload/v1623705742/penguinWedding/white-rose.jpg"
   const halfdome = "https://res.cloudinary.com/abadfish/image/upload/v1623705741/penguinWedding/yosemite.jpg"
+  const lights = "https://res.cloudinary.com/abadfish/image/upload/v1623868991/penguinWedding/party-lights.jpg"
+  const heart = "https://res.cloudinary.com/abadfish/image/upload/v1623874900/penguinWedding/heart-hands.jpg"
 
   const bgImage = () => {
     switch (router.pathname) {
       case '/':
-        return null
+        return {
+          image: null,
+          opacity: null
+        }
       case '/rsvp':
-        return rose
+        return {
+          image: rose,
+          opacity: "rgba(255,255,255,0.8)"
+        }
+      case '/details':
+        return {
+          image: lights,
+          opacity: "rgba(255,255,255,0.9)"
+        }
+      case '/registry':
+        return {
+          image: heart,
+          opacity: "rgba(255,255,255,0.9)"
+        }
       default:
-        return null
+        return {
+          image: rose,
+          opacity: null
+        }
     }
   }
 
@@ -48,8 +69,8 @@ const Layout = ({ children }) => {
             </ContactUs>
           </Link>
           <Header />
-          <PageBg layoutImage={ bgImage() }>
-            <BgOverlay >
+          <PageBg layoutImage={ bgImage().image }>
+            <BgOverlay opacity={ bgImage().opacity }>
               <Main>
               { children }
               </Main>
@@ -85,7 +106,7 @@ const BgOverlay = styled.div `
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: rgba(255,255,255,0.8);
+  background: ${props => props.opacity};
 
 `
 const Main = styled.main  `

@@ -8,18 +8,29 @@ import Layout from '../components/Layout'
 const Home = () => {
 
   const yosemite3 = "https://res.cloudinary.com/abadfish/image/upload/v1623705741/penguinWedding/yosemite-3.jpg"
+  const gala = "https://res.cloudinary.com/abadfish/image/upload/v1623860913/penguinWedding/gala-1.png"
+  const ollie = "https://res.cloudinary.com/abadfish/image/upload/v1623860915/penguinWedding/Leslie-Kirsten-1.png"
+  const tahoe = "https://res.cloudinary.com/abadfish/image/upload/v1623863015/penguinWedding/tahoe-1.png"
 
   return (
     <Layout>
       <StorySection>
         <StoryCard>
-          <StoryImage src={ yosemite3 } alt="Picture of the author"  layout="responsive" width={500}
-        height={700}/>
+          <StoryImage src={ yosemite3 } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
         </StoryCard>
-        <StoryCard></StoryCard>
-        <StoryCard></StoryCard>
-        
+        <StoryCard>
+          <StoryImage src={ gala } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+        </StoryCard>
       </StorySection>
+      <StorySection>
+        <StoryCard>
+          <StoryImage src={ ollie } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+        </StoryCard>
+        <StoryCard>
+          <StoryImage src={ tahoe } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+        </StoryCard>
+      </StorySection>
+      
         
     </Layout>
   )
@@ -28,11 +39,11 @@ const Home = () => {
 export default Home
 
 const StoryImage = styled(Image) `
--webkit-box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2); box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2);
-&:hover {
-  webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
-  box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
-}
+  -webkit-box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2); box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2);
+  &:hover {
+    webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+    box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+  }
 
 
 `
@@ -52,7 +63,7 @@ export const StorySection = styled.section `
   width: 100%;
   min-height: 300px;
   color: #242e62;
-  padding: 3rem ;
+  padding: 5rem 3rem;
   display: flex;
   justify-content: space-around;
   text-align: left;

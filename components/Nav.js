@@ -29,7 +29,7 @@ const Nav = (props) => {
           <Link href="/">Our Story</Link>
           <Link href="/details">When & Where</Link>
           <Link href="/rsvp">RSVP</Link>
-          <Link href="/donate">Registry</Link>
+          <Link href="/registry">Registry</Link>
         </Menu>
         :
         null
@@ -38,7 +38,7 @@ const Nav = (props) => {
         <LinkCell><Link href="/">Our Story</Link></LinkCell>
         <LinkCell><Link href="/details">When & Where</Link></LinkCell>
         <LinkCell><Link href="/rsvp">RSVP</Link></LinkCell>
-        <LinkCell><Link href="/donate">Donate</Link></LinkCell>
+        <LinkCell><Link href="/registry">Registry</Link></LinkCell>
 
       </NavBar>
     </>
