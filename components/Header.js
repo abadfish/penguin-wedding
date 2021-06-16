@@ -51,7 +51,6 @@ const Header = () => {
   }
 
   const headerStyle = () => {
-    console.log(router.pathname)
     switch (router.pathname) {
       case '/rsvp':
         return {

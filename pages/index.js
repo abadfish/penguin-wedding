@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
+import { PageStyle } from './details'
 
 
 const Home = () => {
@@ -14,23 +15,42 @@ const Home = () => {
 
   return (
     <Layout>
-      <StorySection>
-        <StoryCard>
-          <StoryImage src={ yosemite3 } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
-        </StoryCard>
-        <StoryCard>
-          <StoryImage src={ gala } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
-        </StoryCard>
-      </StorySection>
-      <StorySection>
-        <StoryCard>
-          <StoryImage src={ ollie } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
-        </StoryCard>
-        <StoryCard>
-          <StoryImage src={ tahoe } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
-        </StoryCard>
-      </StorySection>
-      
+      {/* <PageStyle>
+        <StorySection>
+          <StoryCard>
+            <h3>Lake Tahoe 2018</h3>
+          </StoryCard>
+          <StoryImageCard>
+            <Image src={ tahoe } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+          </StoryImageCard>
+        </StorySection>
+        <StorySection>
+            <StoryImageCard>
+              <Image src={ yosemite3 } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+            </StoryImageCard>
+            
+          <StoryCard>
+             <h3>Yosemite 2019</h3>
+          </StoryCard>
+        </StorySection>
+        <StorySection>
+          <StoryCard>
+            <h3>2019 TCC Gala</h3>
+          </StoryCard>
+          <StoryImageCard>
+            <Image src={ gala } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+          </StoryImageCard>
+        </StorySection>
+        <StorySection>
+          <StoryImageCard>
+            <Image src={ ollie } alt="Picture of the author"  layout="responsive" width={500} height={700}/>
+          </StoryImageCard>
+          <StoryCard>
+            <h3>Engaged May 27th, 2021</h3>
+          </StoryCard>
+        </StorySection>
+        
+      </PageStyle> */}
         
     </Layout>
   )
@@ -38,32 +58,40 @@ const Home = () => {
 
 export default Home
 
-const StoryImage = styled(Image) `
+const StoryContainer = styled.div `
+  width: 100%;
+  clear: both;
+  position: relative;
+`
+
+const StoryImageCard = styled.article `
+  margin: 2rem;
+  width: 300px;
+  height: auto;
   -webkit-box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2); box-shadow: 0 0 0 1px rgba(16,22,26,.1), 0 0 0 rgba(16,22,26,0), 0 1px 1px rgba(16,22,26,.2);
+  transition: all 2s;
   &:hover {
     webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
     box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
+    background-color: rgba(36,46,98,1);
+    z-index: 1000;
   }
-
-
 `
-
+const ImageOverlay = styled.div `
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36,46,98,1);
+`
 const StoryCard = styled.article `
   margin: 2rem;
   width: 300px;
   height: auto;
-  background: #fff;
-  &:hover {
-    webkit-box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
-    box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 4px 8px rgba(16, 22, 26, 0.2), 0 18px 46px 6px rgba(16, 22, 26, 0.2);
-  }
-`
 
+`
 export const StorySection = styled.section `
   width: 100%;
   min-height: 300px;
   color: #242e62;
-  padding: 5rem 3rem;
   display: flex;
   justify-content: space-around;
   text-align: left;

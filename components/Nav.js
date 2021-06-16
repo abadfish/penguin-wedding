@@ -26,7 +26,7 @@ const Nav = (props) => {
       </MobileNav>
       { mobile && isActive ?
         <Menu>
-          <Link href="/">Our Story</Link>
+          <Link href="/">Home</Link>
           <Link href="/details">When & Where</Link>
           <Link href="/rsvp">RSVP</Link>
           <Link href="/registry">Registry</Link>
@@ -35,7 +35,7 @@ const Nav = (props) => {
         null
       }
       <NavBar textColor={props.textColor}>
-        <LinkCell><Link href="/">Our Story</Link></LinkCell>
+        <LinkCell><Link href="/">Home</Link></LinkCell>
         <LinkCell><Link href="/details">When & Where</Link></LinkCell>
         <LinkCell><Link href="/rsvp">RSVP</Link></LinkCell>
         <LinkCell><Link href="/registry">Registry</Link></LinkCell>
