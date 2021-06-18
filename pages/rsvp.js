@@ -39,7 +39,7 @@ const Rsvp = () => {
   const [msgSuccess, setMsgSuccess] = useState(false)
 
   async function sendRsvp(guest){
-    const res = await fetch(`${ server }/send_rsvp`, {
+    const res = await fetch(`${ server }/guests`, {
       body: JSON.stringify(guest),
       headers: {'Content-Type': 'application/json'},
       method: 'POST'
@@ -56,11 +56,13 @@ const Rsvp = () => {
   }
 
   const [ guest, setGuest ] = useState({
-    name: '',
+    full_name: '',
     email: '',
-    message: '',
-    rsvp: '',
+    notes: '',
+    rsvp: true,
+    attending: ''
   })
+  console.log(guest)
 
   const messageRef = useRef()
 
@@ -93,12 +95,20 @@ const Rsvp = () => {
           <h3>Will you be joining us?</h3>
           <form ref={ messageRef } onSubmit={ handleSubmit }>
             <Checks>
-              <Radio name="rsvp" label="Yup, be there with bells!" value="yes" />
-              <Radio name="rsvp" label="Nope, but I'll be there in spririt :)" value="no" />
+              <Radio 
+                name="attending" 
+                label="Yup, be there with bells!"
+                value={ true }
+                onChange={ handleOnChange } />
+              <Radio 
+                name="attending" 
+                label="Nope, but I'll be there in spririt :)" 
+                value={ false }
+                onChange={ handleOnChange } />
             </Checks>
             <Input
               label='Name'
-              name='name'
+              name='full_name'
               type="text"
               onChange={ handleOnChange }
             />
@@ -110,8 +120,8 @@ const Rsvp = () => {
             />
             <p>If you are RSVP-ing for another guest in addition to yourself or you have a plus one indicated on your invitation, please specify here.</p>
             <Textarea
-              label='Message'
-              name='message'
+              label='Things we should know about your RSVP'
+              name='notes'
               onChange={ handleOnChange }
             />
             <Button type='submit' variant='raised'>Submit</Button>
