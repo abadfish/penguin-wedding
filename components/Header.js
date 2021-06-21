@@ -56,37 +56,45 @@ const Header = () => {
         return {
           textColor: "rgba(36,46,98,1)",
           bgColor: "rgba(255,255,255,0.6)",
-          headerHeight: "30vh"
+          headerHeight: "30vh",
+          imagePosition: "center"
         }
       case '/':
         return {
           textColor: "rgba(255,255,255,1)",
           bgColor: "rgba(36,46,98,0.3)",
-          headerHeight: "100vh"
+          headerHeight: "100vh",
+          imagePosition: "75%"
         }
       case '/details': 
         return {
           textColor: "rgba(255,255,255,1)",
           bgColor: "rgba(0,0,0,0.3)",
-          headerHeight: "30vh"
+          headerHeight: "30vh",
+          imagePosition: "center"
         }
       case '/registry': 
         return {
           textColor: "rgba(36,46,98,1)",
           bgColor: "rgba(255,255,255,0.5)",
-          headerHeight: "30vh"
+          headerHeight: "30vh",
+          imagePosition: "center"
         }
       default:
         return {
           textColor: "#fff",
           bgColor: "rgba(255,255,255,0.5)",
-          headerHeight: "100vh"
+          headerHeight: "100vh",
+          imagePosition: "center"
         }
     }
   }
   return (
     <HeaderComponent>
-      <HeaderWrapper headerImage={headerContent().image}>
+      <HeaderWrapper 
+        headerImage={headerContent().image} 
+        imagePos={ headerStyle().imagePosition}
+      >
         <HeaderOverlay bgColor={ headerStyle().bgColor }>
           <Nav textColor={ headerStyle().textColor }/>
           { router.pathname === '/' ?
@@ -142,6 +150,9 @@ const HeaderWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
+  @media (max-width: 768px) {
+    background-position: ${props => props.imagePos};
+  }
 `
 const HeaderOverlay = styled.div `
   height: 100%;
@@ -157,14 +168,17 @@ const HeaderGrid = styled.div`
   display: inline-grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 45% 65%;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: space-around;
   @media (max-width: 1025px) {
-    // min-height: 500px;
     padding: 0 1.0875rem
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 5%;
+  }
+
 `
 const HeaderCentered = styled.div `
   margin: 0 auto;
@@ -172,7 +186,6 @@ const HeaderCentered = styled.div `
   height: ${props => props.height};
   color: ${props => props.textColor};
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -205,6 +218,7 @@ const HeaderContainer = styled.div `
   @media (max-width: 768px) {
     h1 {
       font-size: 300%;
+      font-weight: 200;
     }
     h2 {
       font-size: 200%;

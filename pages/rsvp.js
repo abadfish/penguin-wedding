@@ -8,27 +8,17 @@ import Radio from 'muicss/lib/react/radio'
 import Button from 'muicss/lib/react/button'
 const { server } = require('../config')
 
-// export async function sendMessage(contact) {
-//   const res = await fetch(`${server}/send_email`, {
-//     body: JSON.stringify(contact),
-//     headers: {'Content-Type': 'application/json'},
-//     method: 'POST'
-//   })
-//   const result = await res.json()
-//   console.log(result)
-// }
 
-const Success = (rsvp) => {
+const Success = ({rsvp}) => {
   return (
     <SuccessMsg>
       <div>
-        <p>Thanks for your response.</p>
-        { rsvp === 'yes' ?
+        <p>Thank you for your RSVP</p>
+        { rsvp.attending ?
           <p>We're so glad you're able to make it!</p>
           :
           null
         }
-        
       </div>
     </SuccessMsg>
   )
@@ -37,6 +27,7 @@ const Success = (rsvp) => {
 const Rsvp = () => {
 
   const [msgSuccess, setMsgSuccess] = useState(false)
+  const [result, setResult] = useState('')
 
   async function sendRsvp(guest){
     const res = await fetch(`${ server }/guests`, {
@@ -45,7 +36,7 @@ const Rsvp = () => {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
+    setResult(result)
     processResult(result)
   }
 
@@ -62,7 +53,6 @@ const Rsvp = () => {
     rsvp: true,
     attending: ''
   })
-  console.log(guest)
 
   const messageRef = useRef()
 
@@ -81,7 +71,7 @@ const Rsvp = () => {
     <Layout>
       { msgSuccess ?
         <Modal onClose={ () => setMsgSuccess(false) }>
-          <Success />
+          <Success rsvp={ result?.guest }/>
           <Button
             onClick={ () => setMsgSuccess(false) }
             size='small'
@@ -118,9 +108,9 @@ const Rsvp = () => {
               type="text"
               onChange={ handleOnChange }
             />
-            <p>If you are RSVP-ing for another guest in addition to yourself or you have a plus one indicated on your invitation, please specify here.</p>
+            <p>If you are RSVP-ing for another guest in addition to yourself, or you have a plus one indicated on your invitation, please specify guest names here.</p>
             <Textarea
-              label='Things we should know about your RSVP'
+              label=''
               name='notes'
               onChange={ handleOnChange }
             />
@@ -142,7 +132,7 @@ const ContactForm = styled.section `
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  z-index: 1000;
+  // z-index: 1000;
   form {
     margin: 3rem 0;
     div {
@@ -175,14 +165,9 @@ const SuccessMsg = styled.div `
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
-  img {
-    width: 250px;
-    height: auto;
-    margin: 0 auto 2rem auto;
-  }
   p {
     color: #242e62;
-    font-size: 130%;
+    font-size: 120%;
   }
 `
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 import Layout from '../components/Layout'
 import { PageStyle, Headings } from './details'
 
@@ -12,7 +13,18 @@ const Registry = () => {
         </Headings>
         <CharityList>
 
-          <h4><a target="_blank" rel="noopener noreferrer" href="https://www.gentlegiantsdrafthorserescue.org/">Gentle Giants Draft Horse Rescue</a></h4>
+          <h4>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.gentlegiantsdrafthorserescue.org/">Gentle Giants Draft Horse Rescue <FaExternalLinkAlt style={{marginLeft: '10px'}}/></a>
+            
+          </h4>
+          <h4>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.thetrevorproject.org/">The Trevor Project <FaExternalLinkAlt style={{marginLeft: '10px'}}/></a>
+            
+          </h4>
+          <h4>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.aprimallyplayfulfoundation.org/">A Primally Playful Foundation <FaExternalLinkAlt style={{marginLeft: '10px'}}/></a>
+            
+          </h4>
         </CharityList>
 
       </PageStyle>
@@ -27,6 +39,14 @@ const CharityList = styled.section `
   padding: 2rem;
   h4 {
     font-size: 1.25rem;
+    padding: 1rem 0;
+  }
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    h4 {
+      font-size: 1.13rem;
+      padding: 0.5rem 0;
+    }
   }
 `
 
