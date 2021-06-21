@@ -57,7 +57,7 @@ const Header = () => {
           textColor: "rgba(255,255,255,1)",
           bgColor: "rgba(36,46,98,0.3)",
           headerHeight: "110vh",
-          imagePosition: "73% 70%"
+          imagePosition: "73%"
         }
       case '/rsvp':
         return {
@@ -171,6 +171,7 @@ const HeaderWrapper = styled.div`
   overflow: hidden;
   @media (max-width: 768px) {
     background-size: auto 900px;
+    // background-position: 73%;
     background-position: ${props => props.imagePos};
   }
 `
