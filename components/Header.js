@@ -102,6 +102,9 @@ const Header = () => {
               textColor={ headerStyle().textColor }
               height={ headerStyle().headerHeight }  
             >
+              <DateMobile>
+                <h3>{ headerContent().subHeading }</h3>
+              </DateMobile>
               <Filler />
               <Filler />
               <HeaderContainer >
@@ -109,7 +112,9 @@ const Header = () => {
                   <h1>{ headerContent().heading1 }</h1>
                   <h2>{ headerContent().tagLine }</h2>
                   <h1>{ headerContent().heading2 }</h1>
-                  <h3>{ headerContent().subHeading }</h3>
+                  <DateFull>
+                    <h3>{ headerContent().subHeading }</h3>
+                  </DateFull>
                 </Intro>
                 
               </HeaderContainer>
@@ -139,22 +144,31 @@ const Header = () => {
 export default Header
 
 const Filler = styled.div `
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     display: none;
   }
 `
 const DateFull = styled.div `
   display: initial;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     display: none;
   }
 
 `
 const DateMobile = styled.div `
   display: initial;
-  @media (min-width: 769px) {
+  text-align: center;
+  @media (min-width: 768px) {
     display: none;
   }
+  h3 {
+    font-family: 'Petit Formal Script', cursive;
+    font-size: 150%;
+    font-weight: 200;
+    color: ${props => props.textColor};
+    padding-top: 1rem;
+  }
+
 `
 
 const HeaderComponent = styled.section `
@@ -169,9 +183,8 @@ const HeaderWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     background-size: auto 950px;
-    // background-position: 73%;
     background-position: ${props => props.imagePos};
   }
 `
@@ -192,11 +205,14 @@ const HeaderGrid = styled.div`
   @media (max-width: 1025px) {
     padding: 0 1.0875rem
   }
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  @media (max-width: 767px) {
+    display: inline-grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 45% 65%;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: space-around;
     padding-bottom: 5%;
   }
 
@@ -236,10 +252,12 @@ const HeaderContainer = styled.div `
     color: ${props => props.textColor};
     padding-top: 2rem;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
+    margin-top: 3rem;
     h1 {
       font-size: 300%;
       font-weight: 200;
+      margin: 0;
     }
     h2 {
       font-size: 200%;
