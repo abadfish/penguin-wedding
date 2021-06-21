@@ -52,19 +52,19 @@ const Header = () => {
 
   const headerStyle = () => {
     switch (router.pathname) {
+      case '/':
+        return {
+          textColor: "rgba(255,255,255,1)",
+          bgColor: "rgba(36,46,98,0.3)",
+          headerHeight: "110vh",
+          imagePosition: "73% 70%"
+        }
       case '/rsvp':
         return {
           textColor: "rgba(36,46,98,1)",
           bgColor: "rgba(255,255,255,0.6)",
           headerHeight: "30vh",
           imagePosition: "center"
-        }
-      case '/':
-        return {
-          textColor: "rgba(255,255,255,1)",
-          bgColor: "rgba(36,46,98,0.3)",
-          headerHeight: "100vh",
-          imagePosition: "75%"
         }
       case '/details': 
         return {
@@ -102,8 +102,8 @@ const Header = () => {
               textColor={ headerStyle().textColor }
               height={ headerStyle().headerHeight }  
             >
-              <div></div>
-              <div></div>
+              <Filler />
+              <Filler />
               <HeaderContainer >
                 <Intro>
                   <h1>{ headerContent().heading1 }</h1>
@@ -113,7 +113,7 @@ const Header = () => {
                 </Intro>
                 
               </HeaderContainer>
-              <div></div>
+              <Filler />
             </HeaderGrid>
             :
             <HeaderCentered
@@ -138,6 +138,25 @@ const Header = () => {
 
 export default Header
 
+const Filler = styled.div `
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+const DateFull = styled.div `
+  display: initial;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+`
+const DateMobile = styled.div `
+  display: initial;
+  @media (min-width: 769px) {
+    display: none;
+  }
+`
+
 const HeaderComponent = styled.section `
   width: 100%;
   clear: both;
@@ -151,6 +170,7 @@ const HeaderWrapper = styled.div`
   background-position: center;
   overflow: hidden;
   @media (max-width: 768px) {
+    background-size: auto 900px;
     background-position: ${props => props.imagePos};
   }
 `
