@@ -28,6 +28,7 @@ const Rsvp = () => {
 
   const [msgSuccess, setMsgSuccess] = useState(false)
   const [result, setResult] = useState('')
+  const [rsvpRecorded, setRsvpRecorded] = useState(false)
 
   async function sendRsvp(guest){
     const res = await fetch(`${ server }/guests`, {
@@ -63,6 +64,7 @@ const Rsvp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setRsvpRecorded(true)
     sendRsvp(guest)
     messageRef.current.reset()
   }
@@ -81,6 +83,11 @@ const Rsvp = () => {
         null
       }
       <ContactPage>
+        { rsvpRecorded ? 
+          <h3>Thank you for your RSVP!</h3>
+          :
+          null
+        }
         <ContactForm>
           <h3>Will you be joining us?</h3>
           <form ref={ messageRef } onSubmit={ handleSubmit }>
