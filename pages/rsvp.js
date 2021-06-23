@@ -83,13 +83,12 @@ const Rsvp = () => {
         null
       }
       <ContactPage>
-        { rsvpRecorded ? 
-          <h3>Thank you for your RSVP!</h3>
-          :
-          null
-        }
         <ContactForm>
-          <h3>Will you be joining us?</h3>
+          { rsvpRecorded ? 
+            <h3 style={{ color: 'blue' }}>Thank you for your RSVP!</h3>
+            :
+            <h3>Will you be joining us?</h3>
+          }
           <form ref={ messageRef } onSubmit={ handleSubmit }>
             <Checks>
               <Radio 
