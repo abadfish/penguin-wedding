@@ -171,6 +171,7 @@ const SuccessMsg = styled.div `
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+  z-index: 1000;
   p {
     color: #242e62;
     font-size: 120%;
