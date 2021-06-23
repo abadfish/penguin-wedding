@@ -181,6 +181,7 @@ const SuccessMsg = styled.div `
 const ContactPage = styled.div `
   text-align: center;
   display: flex;
+  flex-direction: column;
   h3 {
     font-family: 'Jost', sans-serif;
     font-size: 200%;
