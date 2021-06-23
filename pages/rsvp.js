@@ -24,9 +24,20 @@ const Success = ({rsvp}) => {
   )
 }
 
+const Failure = ({error}) => {
+  return (
+    <SuccessMsg>
+      <div>
+        <p>{ error }</p>
+      </div>
+    </SuccessMsg>
+  )
+}
+
 const Rsvp = () => {
 
   const [msgSuccess, setMsgSuccess] = useState(false)
+  const [msgFailure, setMsgFailure] = useState(false)
   const [result, setResult] = useState('')
   const [rsvpRecorded, setRsvpRecorded] = useState(false)
 
@@ -44,6 +55,9 @@ const Rsvp = () => {
   const processResult = (result) => {
     if (result.message === 'rsvp successfully recorded') {
       setMsgSuccess(true)
+    } else {
+      setMsgFailure(true)
+      setRsvpRecorded(false)
     }
   }
 
@@ -76,6 +90,17 @@ const Rsvp = () => {
           <Success rsvp={ result?.guest }/>
           <Button
             onClick={ () => setMsgSuccess(false) }
+            size='small'
+            variant='raised'>Close</Button>
+        </Modal>
+        :
+        null
+      }
+      { msgFailure ?
+        <Modal onClose={ () => setMsgFailure(false) }>
+          <Failure error={ result?.error }/>
+          <Button
+            onClick={ () => setMsgFailure(false) }
             size='small'
             variant='raised'>Close</Button>
         </Modal>
@@ -170,6 +195,7 @@ const SuccessMsg = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-color: #fff;
   height: 100%;
   z-index: 1000;
   p {
@@ -199,4 +225,8 @@ const Checks = styled.div `
   color: #242e62;
   font-family: 'Jost', sans-serif;
   font-size: 120%;
+  input {
+    position: initial !important;
+    margin-right: 7px;
+  }
 `
