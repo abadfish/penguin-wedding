@@ -24,10 +24,22 @@ const Success = ({rsvp}) => {
   )
 }
 
+const Failure = ({error}) => {
+  return (
+    <SuccessMsg>
+      <div>
+        <p>{ error }</p>
+      </div>
+    </SuccessMsg>
+  )
+}
+
 const Rsvp = () => {
 
   const [msgSuccess, setMsgSuccess] = useState(false)
+  const [msgFailure, setMsgFailure] = useState(false)
   const [result, setResult] = useState('')
+  const [rsvpRecorded, setRsvpRecorded] = useState(false)
 
   async function sendRsvp(guest){
     const res = await fetch(`${ server }/guests`, {
@@ -43,6 +55,9 @@ const Rsvp = () => {
   const processResult = (result) => {
     if (result.message === 'rsvp successfully recorded') {
       setMsgSuccess(true)
+    } else {
+      setMsgFailure(true)
+      setRsvpRecorded(false)
     }
   }
 
@@ -63,6 +78,7 @@ const Rsvp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setRsvpRecorded(true)
     sendRsvp(guest)
     formRef.current.reset()
   }
@@ -80,9 +96,24 @@ const Rsvp = () => {
         :
         null
       }
+      { msgFailure ?
+        <Modal onClose={ () => setMsgFailure(false) }>
+          <Failure error={ result?.error }/>
+          <Button
+            onClick={ () => setMsgFailure(false) }
+            size='small'
+            variant='raised'>Close</Button>
+        </Modal>
+        :
+        null
+      }
       <ContactPage>
         <ContactForm>
-          <h3>Will you be joining us?</h3>
+          { rsvpRecorded ? 
+            <h3 style={{ color: 'blue' }}>Thank you for your RSVP!</h3>
+            :
+            <h3>Will you be joining us?</h3>
+          }
           <form ref={ formRef } onSubmit={ handleSubmit }>
             <Checks>
               <Radio 
@@ -165,7 +196,9 @@ const SuccessMsg = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-color: #fff;
   height: 100%;
+  z-index: 1000;
   p {
     color: #242e62;
     font-size: 120%;
@@ -175,6 +208,7 @@ const SuccessMsg = styled.div `
 const ContactPage = styled.div `
   text-align: center;
   display: flex;
+  flex-direction: column;
   h3 {
     font-family: 'Jost', sans-serif;
     font-size: 200%;
@@ -192,4 +226,8 @@ const Checks = styled.div `
   color: #242e62;
   font-family: 'Jost', sans-serif;
   font-size: 120%;
+  input {
+    position: initial !important;
+    margin-right: 7px;
+  }
 `
