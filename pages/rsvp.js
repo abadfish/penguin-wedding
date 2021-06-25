@@ -54,7 +54,7 @@ const Rsvp = () => {
     attending: ''
   })
 
-  const messageRef = useRef()
+  const formRef = useRef()
 
   const handleOnChange = e => {
     const { name, value } = e.target
@@ -64,7 +64,7 @@ const Rsvp = () => {
   const handleSubmit = e => {
     e.preventDefault()
     sendRsvp(guest)
-    messageRef.current.reset()
+    formRef.current.reset()
   }
 
   return (
@@ -83,7 +83,7 @@ const Rsvp = () => {
       <ContactPage>
         <ContactForm>
           <h3>Will you be joining us?</h3>
-          <form ref={ messageRef } onSubmit={ handleSubmit }>
+          <form ref={ formRef } onSubmit={ handleSubmit }>
             <Checks>
               <Radio 
                 name="attending" 
@@ -105,7 +105,8 @@ const Rsvp = () => {
             <Input
               label='Email'
               name='email'
-              type="text"
+              type='email'
+              required={ true }
               onChange={ handleOnChange }
             />
             <p>If you are RSVP-ing for another guest in addition to yourself, or you have a plus one indicated on your invitation, please specify guest names here.</p>
